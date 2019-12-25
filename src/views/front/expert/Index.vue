@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import '@/assets/css/expert.css'
+import './res/expert.css'
 
 export default {
   data () {
@@ -34,37 +34,37 @@ export default {
           id: 1,
           name: '赵义',
           introduce: '这是一个简介说明',
-          avatar: 'expert/expert_default1.jpg'
+          avatar: 'expert/expert.jpg'
         },
         {
           id: 2,
           name: '赵义',
           introduce: '这是一个简介说明',
-          avatar: 'expert/expert_default1.jpg'
+          avatar: 'expert/expert.jpg'
         },
         {
           id: 3,
           name: '赵义',
           introduce: '这是一个简介说明',
-          avatar: 'expert/expert_default1.jpg'
+          avatar: 'expert/expert.jpg'
         },
         {
           id: 4,
           name: '赵义',
           introduce: '这是一个简介说明',
-          avatar: 'expert/expert_default1.jpg'
+          avatar: 'expert/expert.jpg'
         },
         {
           id: 5,
           name: '赵义',
           introduce: '这是一个简介说明',
-          avatar: 'expert/expert_default1.jpg'
+          avatar: 'expert/expert.jpg'
         },
         {
           id: 6,
           name: '赵义',
           introduce: '这是一个简介说明',
-          avatar: 'expert/expert_default1.jpg'
+          avatar: 'expert/expert.jpg'
         }
       ]
     }

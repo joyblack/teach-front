@@ -18,6 +18,5 @@ export default {
 </script>
 
 <style>
-.expert-banner{background:url(http://static.lllnet.cn/zj-web/static/images/news_banner.jpg) center top no-repeat; width:100%; height:186px; margin-bottom:20px;}
-
+.expert-banner{background:url(./res/expert_banner.jpg) center top no-repeat; width:100%; height:186px; margin-bottom:20px;}
 </style>

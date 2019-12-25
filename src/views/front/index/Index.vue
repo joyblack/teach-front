@@ -17,9 +17,9 @@
                   <div class="box1">
                     <ul>
                         <li>
-                            <a href="javascript:jumpAjaxPage('grade/gradeDetail/2');"><img src="http://static.lllnet.cn/grade/gclc/1523072200617.jpg" class="fl" width="120" height="90"></a>
+                            <a href="#"><img src="http://static.lllnet.cn/grade/gclc/1523072200617.jpg" class="fl" width="120" height="90"></a>
                               <div class="nr fl">
-                                <h2><a href="javascript:jumpAjaxPage('grade/gradeDetail/2');">专业技术人员创新能力与创新思维</a></h2>
+                                <h2><a href="#">专业技术人员创新能力与创新思维</a></h2>
                                   <p>当代世界科学技术突飞猛进，高新科技及其产业发展成为改变人类生产生活方式...</p>
                               </div>
                           </li>
@@ -42,9 +42,9 @@
                               </div>
                           </li>
                         <li>
-                            <a href="javascript:jumpAjaxPage('grade/gradeDetail/8');"><img src="http://static.lllnet.cn/grade/gclc/1526384329935.jpg" class="fl" width="120" height="90"></a>
+                            <a href="#"><img src="http://static.lllnet.cn/grade/gclc/1526384329935.jpg" class="fl" width="120" height="90"></a>
                               <div class="nr fl">
-                                <h2><a href="javascript:jumpAjaxPage('grade/gradeDetail/8');">专业技术人员内生动力与职业水平</a></h2>
+                                <h2><a href="#">专业技术人员内生动力与职业水平</a></h2>
                                   <p>
   专业技术人员内生动力与职业水平
                                   </p>
@@ -146,7 +146,7 @@
 </template>
 
 <script>
-import './index.css'
+import './resource/index.css'
 
 export default {
   name: 'home',
@@ -165,13 +165,13 @@ export default {
 }
 
 .flexslider1 {
-  background: url('./banner.jpg') center center no-repeat;
+  background: url('./resource/banner.jpg') center center no-repeat;
   width: 100%;
   height: 380px;
 }
 
 .lct1 {
-  background: url(./progress.jpg) center center no-repeat;
+  background: url('./resource/progress.jpg') center center no-repeat;
   width: 100%;
   height: 82px;
   margin-bottom: 20px;
