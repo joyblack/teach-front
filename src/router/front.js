@@ -44,6 +44,35 @@ export default [
             component: () => import('@/views/front/news/Detail.vue')
           }
         ]
+      },
+      {
+        path: '/info',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/front/info/Info.vue'),
+        children: [
+          {
+            // 默认页
+            path: '',
+            name: 'infoIndex',
+            component: () => import('@/views/front/info/Index.vue')
+          },
+          {
+            path: 'detail/:id',
+            name: 'infoDetail',
+            component: () => import('@/views/front/info/Detail.vue')
+          }
+        ]
+      },
+      {
+        path: '/help',
+        component: () => import(/* webpackChunkName: "about" */ '@/views/front/help/Help.vue'),
+        children: [
+          {
+            // 默认页
+            path: '',
+            name: 'helpIndex',
+            component: () => import('@/views/front/help/Help.vue')
+          }
+        ]
       }
     ]
   }

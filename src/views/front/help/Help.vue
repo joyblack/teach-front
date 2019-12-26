@@ -17,7 +17,7 @@
               </div>
             </div>
 
-            <div class="contact" style="margin-top: 24px">
+            <div class="contact" style="margin-top: 48px">
               <div class="header">人社部门联系方式</div>
               <div class="contact-item" v-for="item of contactMan" :key="item.id">
                 <div class="item-icon">
@@ -78,7 +78,7 @@ export default {
 
 <style>
 .help-banner {
-  background: url(http://static.lllnet.cn/zj-web/static/images/news_banner.jpg) center top no-repeat;
+  background: url(./res/help_banner.jpg) center top no-repeat;
   width: 100%;
   height: 186px;
   margin-bottom: 20px;

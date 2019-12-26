@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import '@/assets/css/info.css'
-
 export default {
   data () {
     return {

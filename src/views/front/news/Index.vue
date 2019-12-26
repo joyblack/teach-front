@@ -32,7 +32,7 @@ export default {
  .info-container {
   height: 43px;
   border-bottom: #CCC dotted 1px;
-  background: url('./res/many_item.png') 0px 21px no-repeat;
+  background: url('~@/assets/img/many_item.png') 0px 21px no-repeat;
   line-height: 43px;
  }
 
