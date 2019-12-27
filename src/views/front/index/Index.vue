@@ -2,7 +2,6 @@
   <div>
     <!--横幅 -->
     <div class="flexslider1"></div>
-
     <!-- 学习流程 -->
     <div class="lct1"></div>
 

@@ -1,10 +1,10 @@
-import Index from '@/layout/Index.vue'
+import Front from '@/layout/Front.vue'
 
 export default [
   {
     path: '/',
-    name: 'index',
-    component: Index,
+    name: 'front',
+    component: Front,
     redirect: 'home',
     children: [
       {
@@ -47,7 +47,7 @@ export default [
       },
       {
         path: '/info',
-        component: () => import(/* webpackChunkName: "about" */ '@/views/front/info/Info.vue'),
+        component: () => import('@/views/front/info/Info.vue'),
         children: [
           {
             // 默认页

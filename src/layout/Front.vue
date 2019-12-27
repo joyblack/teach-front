@@ -11,7 +11,7 @@
         <div class="h_middle_in">
             <div class="logo">
               <a href="#">
-                <img src="./img/logo.png" style="width:1200px;height:120px">
+                <img src="./img/logo.png" style="width:1200px;height:120px" alt="logo" />
               </a>
             </div>
         </div>
@@ -28,7 +28,7 @@
     <!-- footer -->
     <div class="footer">
       <div class="footer_in">
-        <a href="javascript:clickFootor('id_index');">首页</a>  |  <a href="javascript:clickFootor('id_cms');">新闻中心</a>  |  <a href="javascript:clickFootor('id_grades');">培训广场</a>  |  <a href="javascript:clickFootor('id_userCenter');">个人中心</a>   |  <a href="#" data-toggle="modal" data-target="#erweima">手机学习</a>  |  <a href="javascript:clickFootor('id_help');">使用帮助</a>
+        <a href="#">首页</a>  |  <a href="#">新闻中心</a>  |  <a href="#">培训广场</a>  |  <a href="#">个人中心</a>   |  <a href="#" data-toggle="modal" data-target="#erweima">手机学习</a>  |  <a href="#">使用帮助</a>
       </div>
       <div class="f_b">
         主办单位：河南工业大学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
