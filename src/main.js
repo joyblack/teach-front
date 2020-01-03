@@ -5,7 +5,6 @@ import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import store from './store'
 import 'animate.css'
-import './assets/css/global.css'
 
 Vue.config.productionTip = false
 

@@ -1,4 +1,4 @@
-import HttpRequest from '@/lib/uitls/request.js'
+import HttpRequest from '@/lib/utils/request.js'
 
 const request = new HttpRequest()
 

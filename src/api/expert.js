@@ -1,35 +1,35 @@
 import request from './index'
 
-const user = {
+const expert = {
   add: (data) => {
     return request.request({
-      url: 'user/add',
+      url: 'expert/add',
       method: 'post',
       data: data
     })
   },
   delete: (id) => {
     return request.request({
-      url: `user/delete/${id}`,
+      url: `expert/delete/${id}`,
       method: 'delete'
     })
   },
   get: (id) => {
     return request.request({
-      url: `user/get/${id}`,
+      url: `expert/get/${id}`,
       method: 'get'
     })
   },
   page: (data) => {
     return request.request({
-      url: 'user/page',
+      url: 'expert/page',
       method: 'post',
       data: data
     })
   },
   edit: (data) => {
     return request.request({
-      url: 'user/edit',
+      url: 'expert/edit',
       method: 'put',
       data: data
     })
@@ -37,24 +37,9 @@ const user = {
   // 设置状态
   status: (id, status) => {
     return request.request({
-      url: `user/status/${id}/${status}`,
+      url: `expert/status/${id}/${status}`,
       method: 'put'
-    })
-  },
-  // 重置密码
-  resetPassword: (id) => {
-    return request.request({
-      url: `user/resetPassword/${id}`,
-      method: 'put'
-    })
-  },
-  // 修改密码
-  changePassword: (data) => {
-    return request.request({
-      url: 'user/changePassword',
-      method: 'put',
-      data: data
     })
   }
 }
-export default user
+export default expert

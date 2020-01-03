@@ -14,7 +14,6 @@
         <a-form-item label="用户名" v-bind="formItemLayout">
           <a-input placeholder="请输入用户名"
                    allowClear
-                   :disabled="true"
                    v-decorator="['username',{ initialValue:formData.username, rules: [{ required: true, message: '请输入用户名' }] }]"
           />
         </a-form-item>
@@ -47,14 +46,17 @@
 import user from '@/api/user.js'
 import { message } from 'ant-design-vue'
 export default {
-  name: 'UserEdit',
+  name: 'UserAdd',
   beforeCreate () {
     this.form = this.$form.createForm(this)
+  },
+  mounted () {
+    this.loader()
   },
   data () {
     return {
       visible: false,
-      title: '编辑用户',
+      title: '新增用户',
       confirmLoading: false,
       formItemLayout: {
         labelCol: {
@@ -89,9 +91,6 @@ export default {
   methods: {
     openModal (record) {
       this.visible = true
-      // 加载数据
-      this.formData.id = record.id
-      this.loader()
     },
     // 确定
     ok () {
@@ -99,11 +98,10 @@ export default {
         if (!error) {
           this.confirmLoading = true
         }
-        values.id = this.formData.id
-        user.edit(values).then(res => {
+        user.add(values).then(res => {
           res = res.data
           if (res.state) {
-            message.success('更新成功')
+            message.success('创建成功')
             // 加载列表
             this.$parent.loader()
             this.visible = false
@@ -120,19 +118,6 @@ export default {
     },
     // 加载数据
     loader () {
-      // 通过ID获取数据
-      user.get(this.formData.id).then(res => {
-        res = res.data
-        if (res.state) {
-          this.formData = {
-            id: res.data.id,
-            name: res.data.name,
-            username: res.data.username,
-            phone: res.data.phone,
-            remarks: res.data.remarks
-          }
-        }
-      })
     },
     // 关闭后处理
     afterClose () {

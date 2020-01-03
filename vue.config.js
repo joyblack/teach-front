@@ -1,5 +1,5 @@
-// const PUBLIC_PATH = process.env.NODE_ENV === 'production' ? 'http://localhost:80/dist/' : '/ssss'
 const path = require('path')
+const baseUrl = process.env.NODE_ENV === 'production' ? 'http://domain.com' : 'http://localhost:80/teach/'
 
 const resolve = dir => path.join(__dirname, dir)
 
@@ -17,23 +17,26 @@ module.exports = {
   // 打包时不生成.map文件,减小打包大小，以及打包速度
   productionSourceMap: false,
   devServer: {
+    disableHostCheck: true,
     overlay: {
       warnings: false,
       errors: false
     },
     // 设置主机地址
-    host: 'localhost',
+    host: '0.0.0.0',
     // 设置默认端口
     port: 8081,
+    https: false,
+    hotOnly: false,
     // 设置代理
     proxy: {
       '/api': {
-        // 目标 API 地址
-        target: 'http://127.0.0.1:80/', // 接口的域名
-        // 如果要代理 websockets
+        target: baseUrl,
         ws: false,
-        // 将主机标头的原点更改为目标URL
-        changeOrigin: true
+        changOrigin: true, // 允许跨域
+        pathRewrite: {
+          '^/api': '' // 请求的时候使用这个api就可以
+        }
       }
     }
   }

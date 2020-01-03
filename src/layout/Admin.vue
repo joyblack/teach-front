@@ -4,14 +4,21 @@
     <a-layout-sider collapsible v-model="collapsed">
       <div class="logo" />
       <a-menu theme="dark" :defaultSelectedKeys="['1']" mode="inline">
-        <a-menu-item key="1">
-          <a-icon type="pie-chart" />
-          <span>首页</span>
+        <!-- 首页 -->
+        <a-menu-item key="1" @click="changeBreadcrumb('首页', '')">
+          <router-link :to="{name: 'ahome'}"><a-icon type="pie-chart" />首页</router-link>
         </a-menu-item>
-        <a-sub-menu key="sub1">
+        <!-- 用户管理 -->
+        <a-sub-menu key="subUser">
           <span slot="title"><a-icon type="user" /><span>用户管理</span></span>
-          <a-menu-item key="3"><router-link :to=" {name: 'user'} ">用户管理</router-link></a-menu-item>
+          <a-menu-item key="3" @click="changeBreadcrumb('用户管理', '用户管理')"><router-link :to=" {name: 'user'} ">用户管理</router-link></a-menu-item>
         </a-sub-menu>
+        <!-- 专家管理 -->
+        <a-sub-menu key="subExpert">
+          <span slot="title"><a-icon type="idcard" /><span>专家管理</span></span>
+          <a-menu-item key="4" @click="changeBreadcrumb('专家管理', '专家管理')"><router-link :to=" {name: 'aExpert'} ">专家管理</router-link></a-menu-item>
+        </a-sub-menu>
+        <!-- 使用帮助 -->
         <a-menu-item key="9">
           <a-icon type="weibo" />
           <span>使用帮助</span>
@@ -23,7 +30,8 @@
       <a-layout-content style="margin: 0 16px">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item><a-icon type="home"></a-icon></a-breadcrumb-item>
-          <a-breadcrumb-item>用户管理</a-breadcrumb-item>
+          <a-breadcrumb-item>{{ firstLevel }}</a-breadcrumb-item>
+          <a-breadcrumb-item>{{ secondLevel }}</a-breadcrumb-item>
         </a-breadcrumb>
         <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
           <router-view />
@@ -43,7 +51,15 @@ export default {
     return {
       // 国际化
       locale: zhCN,
-      collapsed: false
+      collapsed: false,
+      firstLevel: '首页',
+      secondLevel: ''
+    }
+  },
+  methods: {
+    changeBreadcrumb (firstLevel, secondLevel) {
+      this.firstLevel = firstLevel
+      this.secondLevel = secondLevel
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <user-search></user-search>
+    <expert-search></expert-search>
     <a-row>
       <div class="operate-button-container">
         <a-button type="primary" icon="plus" @click="add" :style="{ marginLeft: '8px' }">新建</a-button>
@@ -29,24 +29,22 @@
                      <a href="javascript:;" @click="status(record, 1)">启用</a>
                 </span>
                 <a-divider type="vertical"/>
-              <a href="javascript:;" @click="resetPassword(record)">重置密码</a>
-                <a-divider type="vertical"/>
               <a href="javascript:;" @click="deleteData(record)">删除</a>
           </span>
         </a-table>
       </div>
     </a-row>
-    <user-add ref="userAdd"></user-add>
-    <user-edit ref="userEdit"></user-edit>
+    <expert-add ref="expertAdd"></expert-add>
+    <expert-edit ref="expertEdit"></expert-edit>
   </div>
 </template>
 
 <script>
-import UserSearch from './components/UserSearch.vue'
-import UserAdd from './components/UserAdd.vue'
-import UserEdit from './components/UserEdit.vue'
+import ExpertSearch from './components/ExpertSearch.vue'
+import ExpertAdd from './components/ExpertAdd.vue'
+import ExpertEdit from './components/ExpertEdit.vue'
 import { format } from '@/lib/utils/TableUtil.js'
-import user from '@/api/user.js'
+import expert from '@/api/expert.js'
 import { message, Modal } from 'ant-design-vue'
 
 const confirm = Modal.confirm
@@ -56,11 +54,6 @@ const columns = [
   {
     title: '序号',
     dataIndex: 'key',
-    align: 'center'
-  },
-  {
-    title: '用户名',
-    dataIndex: 'username',
     align: 'center'
   },
   {
@@ -74,7 +67,17 @@ const columns = [
     align: 'center'
   },
   {
-    title: '用户状态',
+    title: '照片',
+    dataIndex: 'photo',
+    align: 'center'
+  },
+  {
+    title: '身份证',
+    dataIndex: 'idNumber',
+    align: 'center'
+  },
+  {
+    title: '状态',
     dataIndex: 'status',
     align: 'center',
     scopedSlots: { customRender: 'status' }
@@ -88,11 +91,10 @@ const columns = [
 ]
 
 export default {
-  name: 'User',
   components: {
-    UserSearch,
-    UserEdit,
-    UserAdd
+    ExpertSearch,
+    ExpertEdit,
+    ExpertAdd
   },
   data () {
     return {
@@ -138,7 +140,7 @@ export default {
     loader () {
       this.loading = true
       const vm = this
-      user.page({
+      expert.page({
         page: this.pagination.current,
         size: this.pagination.pageSize,
         search: this.searchValue.search ? this.searchValue.search : null
@@ -147,7 +149,6 @@ export default {
         if (res.state) {
           format(res.data.data, vm.pagination.current, vm.pagination.pageSize)
           this.dataSource = res.data.data
-          // this.pagination.total = res.data.totalElements
           this.pagination.total = res.data.total
           this.loading = false
         } else {
@@ -157,23 +158,23 @@ export default {
       this.loading = false
     },
     add () {
-      this.$refs.userAdd.openModal()
+      this.$refs.expertAdd.openModal()
     },
     edit (record) {
       if (record) {
-        this.$refs.userEdit.openModal(record)
+        this.$refs.expertEdit.openModal(record)
       }
     },
     status (record, status) {
       if (record) {
         const _this = this
         confirm({
-          title: '确认' + (status === 0 ? '禁用' : '启用') + '用户：' + record.username + '？',
+          title: '确认' + (status === 0 ? '禁用' : '启用') + '专家：' + record.name + '？',
           content: '单击确认按钮执行此操作',
           onOk () {
-            user.status(record.id, status).then(res => {
+            expert.status(record.id, status).then(res => {
               if (res.data.state) {
-                message.success('修改用户状态成功')
+                message.success('修改专家状态成功')
                 _this.loader()
               } else {
                 message.error(res.data.message)
@@ -186,10 +187,10 @@ export default {
     resetPassword (record) {
       if (record) {
         confirm({
-          title: '确认重置用户【' + record.username + '】的密码？',
+          title: '确认重置专家【' + record.name + '】的密码？',
           content: '单击确认按钮执行此操作',
           onOk () {
-            user.resetPassword(record.id).then(res => {
+            expert.resetPassword(record.id).then(res => {
               if (res.data.state) {
                 message.success('重置密码成功')
               } else {
@@ -200,17 +201,17 @@ export default {
         })
       }
     },
-    // 删除用户
+    // 删除专家
     deleteData (record) {
       const _this = this
       if (record) {
         confirm({
-          title: '确认删除用户【' + record.username + '】？',
+          title: '确认删除专家【' + record.name + '】？',
           content: '请小心执行此操作，单击确认执行',
           onOk () {
-            user.delete(record.id).then(res => {
+            expert.delete(record.id).then(res => {
               if (res.data.state) {
-                message.success('删除用户成功')
+                message.success('删除专家成功')
                 // 若当前页只有一条数据，并且不为第一页，则跳转到上一页
                 if (_this.dataSource.length === 1 && _this.pagination.current > 1) {
                   _this.pagination.current = _this.pagination.current - 1

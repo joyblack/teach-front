@@ -16,6 +16,11 @@ export default [
         path: 'user',
         name: 'user',
         component: () => import('@/views/admin/user/User.vue')
+      },
+      {
+        path: 'expert',
+        name: 'aExpert',
+        component: () => import('@/views/admin/expert/Expert.vue')
       }
     ]
   },

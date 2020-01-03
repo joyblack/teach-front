@@ -47,7 +47,6 @@
 import user from '@/api/user.js'
 import { message } from 'ant-design-vue'
 export default {
-  name: 'UserEdit',
   beforeCreate () {
     this.form = this.$form.createForm(this)
   },
