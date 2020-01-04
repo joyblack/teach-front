@@ -80,6 +80,11 @@ const columns = [
     scopedSlots: { customRender: 'status' }
   },
   {
+    title: '创建时间',
+    dataIndex: 'create_time',
+    align: 'center'
+  },
+  {
     title: '操作',
     dataIndex: 'action',
     align: 'center',

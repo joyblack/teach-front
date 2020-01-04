@@ -1,9 +1,9 @@
 <template>
   <div>
-    <expert-search></expert-search>
+    <news-search></news-search>
     <a-row>
       <div class="operate-button-container">
-        <a-button type="primary" icon="plus" @click="add" :style="{ marginLeft: '8px' }">新建</a-button>
+        <a-button type="primary" icon="plus" @click="add" :style="{ marginLeft: '8px' }">添加新闻</a-button>
       </div>
     </a-row>
     <a-row>
@@ -18,8 +18,8 @@
             </span>
           </span>
 
-          <span slot="photo" slot-scope="photoId">
-            <img :src="'/api/download/expert/' + photoId" style="width: 50px; height: 50px" >
+          <span slot="banner" slot-scope="bannerId">
+            <img :src="'/api/download/newsBanner/' + bannerId" style="width: 50px; height: 50px" >
           </span>
 
           <span slot="edit" slot-scope="text, record">
@@ -38,17 +38,13 @@
         </a-table>
       </div>
     </a-row>
-    <expert-add ref="expertAdd"></expert-add>
-    <expert-edit ref="expertEdit"></expert-edit>
   </div>
 </template>
 
 <script>
-import ExpertSearch from './components/ExpertSearch.vue'
-import ExpertAdd from './components/ExpertAdd.vue'
-import ExpertEdit from './components/ExpertEdit.vue'
+import NewsSearch from './Search.vue'
 import { format } from '@/lib/utils/TableUtil.js'
-import expert from '@/api/expert.js'
+import news from '@/api/news.js'
 import { message, Modal } from 'ant-design-vue'
 
 const confirm = Modal.confirm
@@ -61,25 +57,26 @@ const columns = [
     align: 'center'
   },
   {
-    title: '姓名',
-    dataIndex: 'name',
-    align: 'center'
-  },
-  {
-    title: '电话',
-    dataIndex: 'phone',
-    align: 'center'
-  },
-  {
-    title: '照片',
-    dataIndex: 'photoId',
+    title: '标题',
+    dataIndex: 'title',
     align: 'center',
-    scopedSlots: { customRender: 'photo' }
+    width: '320px'
   },
   {
-    title: '身份证',
-    dataIndex: 'idNumber',
+    title: '创作者',
+    dataIndex: 'username',
     align: 'center'
+  },
+  // {
+  //   title: '类型',
+  //   dataIndex: 'newsType',
+  //   align: 'center'
+  // },
+  {
+    title: '封面',
+    dataIndex: 'bannerId',
+    align: 'center',
+    scopedSlots: { customRender: 'banner' }
   },
   {
     title: '状态',
@@ -88,7 +85,7 @@ const columns = [
     scopedSlots: { customRender: 'status' }
   },
   {
-    title: '创建时间',
+    title: '发布时间',
     dataIndex: 'create_time',
     align: 'center'
   },
@@ -101,10 +98,9 @@ const columns = [
 ]
 
 export default {
+  name: 'news',
   components: {
-    ExpertSearch,
-    ExpertEdit,
-    ExpertAdd
+    NewsSearch
   },
   data () {
     return {
@@ -150,7 +146,7 @@ export default {
     loader () {
       this.loading = true
       const vm = this
-      expert.page({
+      news.page({
         page: this.pagination.current,
         size: this.pagination.pageSize,
         search: this.searchValue.search ? this.searchValue.search : null
@@ -159,6 +155,7 @@ export default {
         if (res.state) {
           format(res.data.data, vm.pagination.current, vm.pagination.pageSize)
           this.dataSource = res.data.data
+          // this.pagination.total = res.data.totalElements
           this.pagination.total = res.data.total
           this.loading = false
         } else {
@@ -168,23 +165,23 @@ export default {
       this.loading = false
     },
     add () {
-      this.$refs.expertAdd.openModal()
+      this.$router.push({ name: 'newsAdd' })
     },
     edit (record) {
       if (record) {
-        this.$refs.expertEdit.openModal(record)
+        this.$router.push({ name: 'newsEdit', params: { id: parseInt(record.id) } })
       }
     },
     status (record, status) {
       if (record) {
         const _this = this
         confirm({
-          title: '确认' + (status === 0 ? '禁用' : '启用') + '专家：' + record.name + '？',
+          title: '确认' + (status === 0 ? '禁用' : '启用') + '新闻【' + record.title + '】？',
           content: '单击确认按钮执行此操作',
           onOk () {
-            expert.status(record.id, status).then(res => {
+            news.status(record.id, status).then(res => {
               if (res.data.state) {
-                message.success('修改专家状态成功')
+                message.success('修改新闻信息状态成功')
                 _this.loader()
               } else {
                 message.error(res.data.message)
@@ -194,34 +191,16 @@ export default {
         })
       }
     },
-    resetPassword (record) {
-      if (record) {
-        confirm({
-          title: '确认重置专家【' + record.name + '】的密码？',
-          content: '单击确认按钮执行此操作',
-          onOk () {
-            expert.resetPassword(record.id).then(res => {
-              if (res.data.state) {
-                message.success('重置密码成功')
-              } else {
-                message.error(res.data.message)
-              }
-            })
-          }
-        })
-      }
-    },
-    // 删除专家
     deleteData (record) {
       const _this = this
       if (record) {
         confirm({
-          title: '确认删除专家【' + record.name + '】？',
+          title: '确认删除新闻【' + record.title + '】？',
           content: '请小心执行此操作，单击确认执行',
           onOk () {
-            expert.delete(record.id).then(res => {
+            news.delete(record.id).then(res => {
               if (res.data.state) {
-                message.success('删除专家成功')
+                message.success('删除成功')
                 // 若当前页只有一条数据，并且不为第一页，则跳转到上一页
                 if (_this.dataSource.length === 1 && _this.pagination.current > 1) {
                   _this.pagination.current = _this.pagination.current - 1

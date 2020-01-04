@@ -18,6 +18,16 @@
           <span slot="title"><a-icon type="idcard" /><span>专家管理</span></span>
           <a-menu-item key="4" @click="changeBreadcrumb('专家管理', '专家管理')"><router-link :to=" {name: 'aExpert'} ">专家管理</router-link></a-menu-item>
         </a-sub-menu>
+        <!-- 新闻管理 -->
+        <a-sub-menu key="subNews">
+          <span slot="title"><a-icon type="schedule" /><span>新闻管理</span></span>
+          <a-menu-item key="5" @click="changeBreadcrumb('新闻管理', '新闻管理')"><router-link :to=" {name: 'aNews'} ">新闻管理</router-link></a-menu-item>
+        </a-sub-menu>
+        <!-- 公告管理 -->
+        <a-sub-menu key="subInfo">
+          <span slot="title"><a-icon type="sound" /><span>公告管理</span></span>
+          <a-menu-item key="6" @click="changeBreadcrumb('公告管理', '公告管理')"><router-link :to=" {name: 'aInfo'} ">公告管理</router-link></a-menu-item>
+        </a-sub-menu>
         <!-- 使用帮助 -->
         <a-menu-item key="9">
           <a-icon type="weibo" />

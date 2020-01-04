@@ -29,7 +29,7 @@
                    v-decorator="['idNumber',{ initialValue:formData.idNumber, rules: [] }]"
           />
         </a-form-item>
-        <a-form-item label="照片" v-bind="formItemLayout">
+        <a-form-item label="* 照片" v-bind="formItemLayout">
           <a-upload
             listType="picture-card"
             :fileList="fileList"
@@ -53,7 +53,7 @@
                 简介（选填）
             </span>
           <a-textarea placeholder="请输入简介" :rows="4"
-                      v-decorator="['introduce',{ initialValue:formData.remarks, rules: [{ required: true, message: '简介不能为空'}] }]"
+                      v-decorator="['introduce',{ initialValue:formData.introduce, rules: [{ required: true, message: '简介不能为空'}] }]"
           />
         </a-form-item>
         <a-form-item v-bind="formItemLayout">
@@ -116,7 +116,7 @@ export default {
         name: null,
         idNumber: null,
         phone: null,
-        photo: null,
+        photoId: null,
         remarks: null,
         introduce: null
       }
@@ -152,6 +152,7 @@ export default {
             url: '/api/download/expert/' + data.id
           })
           message.success('上传成功')
+          this.formData.photoId = data.id
         } else {
           message.warning(res.data.message)
         }
@@ -160,13 +161,23 @@ export default {
     },
     openModal (record) {
       this.visible = true
+      this.fileList = []
     },
     // 确定
     ok () {
       this.form.validateFields((error, values) => {
-        if (!error) {
-          this.confirmLoading = true
+        // 表单验证
+        if (error) {
+          return false
         }
+        // 上传图片验证
+        values.photoId = this.formData.photoId
+        if (!values.photoId) {
+          message.error('专家图片不能为空')
+          return false
+        }
+        // 开启加载
+        this.confirmLoading = true
         expert.add(values).then(res => {
           res = res.data
           if (res.state) {
@@ -179,6 +190,8 @@ export default {
           }
         })
         this.confirmLoading = false
+        // 重置上传图片
+        this.fileList = {}
       })
     },
     cancel () {
