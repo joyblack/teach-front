@@ -3,7 +3,7 @@
     <a-form :form="form" class="login-form" @submit="login">
       <h3 class="form-title">账号登录</h3>
       <a-form-item style="margin-left:10%;margin-top:9%;margin-bottom:30px;">
-        <a-input placeholder="用户名"
+        <a-input  autocomplete="off" placeholder="用户名"
                  size="large"
                  style="height:50px;width:320px;"
                  v-decorator="['username',{ initialValue:loginInfo.username,rules: [{ required: true, message: '请输入用户名' }]}]"
@@ -86,13 +86,13 @@ export default {
 }
 </script>
 
-<style scoped>
-  .ant-input-affix-wrapper .ant-input {
+<style>
+  .login-form .ant-input-affix-wrapper .ant-input {
     border-radius: 0;
-    padding-left: 43px !important;
+    padding-left: 46px !important;
   }
 
-  form {
+  .login-form {
     position: fixed;
     top: 25%;
     left: 60%;
@@ -103,14 +103,14 @@ export default {
     background-position: center top;
   }
 
-  .form-title {
+  .login-form .form-title {
     color: #fff;
     font-size: 24px;
     text-align: center;
     margin-top: 60px;
   }
 
-  .card-title {
+  .login-form .card-title {
     margin: 0;
     color: #333;
     font-weight: 500;
@@ -118,7 +118,7 @@ export default {
     font-size: 28px;
   }
 
-  .login-form-button {
+  .login-form .login-form-button {
     width: 320px;
     height: 50px;
     color: #022c39;

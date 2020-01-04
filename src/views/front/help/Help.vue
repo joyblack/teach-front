@@ -1,7 +1,5 @@
 <template>
   <div id="joy_help">
-    <div class="help-banner">
-    </div>
     <div class="joy_main" style="min-height: 412px">
       <a-tabs tabPosition="left" :tabBarGutter="tabBarGutter">
           <a-tab-pane tab="联系我们" key="1">
