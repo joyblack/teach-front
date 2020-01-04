@@ -10,7 +10,7 @@
         <LoginForm></LoginForm>
       </div>
       <a-layout-footer style="color: #ffffff;">
-       贵州工程应用技术学院  ©2019
+       贵州工程应用技术学院  ©2020
       </a-layout-footer>
     </div>
 

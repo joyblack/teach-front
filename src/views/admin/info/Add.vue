@@ -106,7 +106,7 @@ export default {
         info.add(this.formData).then(res => {
           res = res.data
           if (res.state) {
-            message.success('添加成功，2秒后跳转到管理页面...', 2, () => {
+            message.success('添加成功，1秒后跳转到管理页面...', 1, () => {
               this.$router.push({ name: 'infoList' })
             })
           } else {

@@ -4,4 +4,10 @@ const META_TITLE = {
   ADMIN: '网络教育管理平台'
 }
 
-export { META_TITLE }
+const TOKEN_KEY = {
+  TOKEN: 'joy',
+  ID: 'id',
+  USERNAME: 'username'
+}
+
+export { META_TITLE, TOKEN_KEY }

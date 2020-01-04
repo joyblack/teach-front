@@ -2,6 +2,7 @@
 * nProgress浏览器上方进度加载
 * */
 import axios from 'axios'
+import { TOKEN_KEY } from '@/constant/common.js'
 
 class HttpRequest {
   constructor (url = '/api/') {
@@ -30,15 +31,16 @@ class HttpRequest {
   interceptors (instance) {
     // 请求的拦截
     instance.interceptors.request.use(config => {
-      // 添加全局的loading...
+      // 添加token
       return config
     }, error => {
       return Promise.reject(error)
     })
 
     // 返回的拦截
-    instance.interceptors.response.use(res => {
-      return res
+    instance.interceptors.response.use(config => {
+      config.headers.joy = localStorage.getItem(TOKEN_KEY.TOKEN)
+      return config
     }, error => {
       return Promise.reject(error)
     })

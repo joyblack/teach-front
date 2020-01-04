@@ -32,8 +32,8 @@
 
       <a-form-item style="margin-left: 10%;margin-top: 8%">
         <a-button
+        html-type="submit"
           type="primary"
-          html-type="submit"
           class="login-form-button">
           登 录
         </a-button>
@@ -43,6 +43,10 @@
 </template>
 
 <script>
+import login from '@/api/login.js'
+import { message } from 'ant-design-vue'
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'LoginForm',
   data () {
@@ -57,11 +61,24 @@ export default {
     this.form = this.$form.createForm(this)
   },
   methods: {
+    ...mapMutations(['changeLogin']),
     // 登录方法
-    login () {
+    login (e) {
+      e.preventDefault()
       this.form.validateFields((error, values) => {
         if (!error) {
-          console.log(values)
+          login.login({
+            username: values.username,
+            password: values.password
+          }).then(res => {
+            res = res.data
+            if (res.state) {
+              this.changeLogin(res.data)
+              this.$router.push({ name: 'ahome' })
+            } else {
+              message.error(res.message)
+            }
+          })
         }
       })
     }
@@ -69,7 +86,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .ant-input-affix-wrapper .ant-input {
     border-radius: 0;
     padding-left: 43px !important;

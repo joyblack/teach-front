@@ -74,7 +74,7 @@ export default [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: () => import('@/views/admin/login/Login')
   }
 ]

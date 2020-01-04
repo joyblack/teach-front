@@ -3,7 +3,7 @@
     <info-search></info-search>
     <a-row>
       <div class="operate-button-container">
-        <a-button type="primary" icon="plus" @click="add" :style="{ marginLeft: '8px' }">新增文章</a-button>
+        <a-button type="primary" icon="plus" @click="add" :style="{ marginLeft: '8px' }">新增公告</a-button>
       </div>
     </a-row>
     <a-row>

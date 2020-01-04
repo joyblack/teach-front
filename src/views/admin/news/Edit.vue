@@ -4,7 +4,7 @@
         <a-form-item label="标题" v-bind="formItemLayout">
           <a-input placeholder="请输入新闻标题"
                    allowClear
-                   v-decorator="['title',{ initialValue:formData.username, rules: [{ required: true, message: '新闻标题不能为空' }] }]"
+                   v-decorator="['title',{ initialValue:formData.title, rules: [{ required: true, message: '新闻标题不能为空' }] }]"
           />
         </a-form-item>
         <a-form-item label="创建者" v-bind="formItemLayout">
@@ -109,7 +109,7 @@ export default {
         news.edit(this.formData).then(res => {
           res = res.data
           if (res.state) {
-            message.success('更新成功，2秒后跳转到管理页面...', 2, () => {
+            message.success('更新成功，1秒后跳转到管理页面...', 1, () => {
               this.$router.push({ name: 'newsList' })
             })
           } else {
